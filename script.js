@@ -15,7 +15,12 @@ $('#makeName').on('click', function () {
         chatlog('<i>' + $('#roomName').val() + '</i>に入室しました');
         // チャットを送信
         $('#send').click(function () {
-            var msg = $('#msg').val();
+            let d = new Date();
+            let h = d.getHours();
+            let m = d.getMinutes();
+            let time = h + ':' + m;
+            
+            var msg = $('#msg').val() + ' | ' +time;
             debugger;
             room.send(msg);
             chatlog('自分> ' + msg);
