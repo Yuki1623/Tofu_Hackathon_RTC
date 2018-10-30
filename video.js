@@ -2,7 +2,7 @@
 $(function () {
   $('#makeName').on('click', () => {
     const $myName = $('#inputMyName').val();
-    $('#overflow').remove();
+    $('#overflow').hide();
     // Peer object
     const peer = new Peer($myName,{
       key: '509e8d12-793a-4daa-90c4-f077b66b066b',
@@ -12,20 +12,17 @@ $(function () {
     let localStream;
     let room;
     peer.on('open', () => {
-      console.log(peer.id);
-      
       $('#my-id').text(peer.id);
-      // Get things started
-      step1();
     });
   
     peer.on('error', err => {
       alert(err.message);
-      // Return to step 2 if error occurs
-      step2();
+      $('#overflow').show();
+      $('#makeName').val('');
     });
   
     $('#make-call').on('submit', e => {
+      step1();
       e.preventDefault();
       // Initiate a call!
       const roomName = $('#join-room').val();
