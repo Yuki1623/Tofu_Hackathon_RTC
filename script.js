@@ -21,7 +21,6 @@ $('#makeName').on('click', function () {
             let time = h + ':' + m;
             
             var msg = $('#msg').val() + ' | ' +time;
-            debugger;
             room.send(msg);
             chatlog('自分> ' + msg);
             $('#msg').val("");
