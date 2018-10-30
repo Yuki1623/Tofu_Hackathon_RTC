@@ -1,14 +1,19 @@
 /* eslint-disable require-jsdoc */
-$(function() {
+$(function () {
+  $('#makeName').on('click', () => {
+    const $myName = $('#inputMyName').val();
+    $('#overflow').remove();
     // Peer object
-    const peer = new Peer({
-      key:   '509e8d12-793a-4daa-90c4-f077b66b066b',
+    const peer = new Peer($myName,{
+      key: '509e8d12-793a-4daa-90c4-f077b66b066b',
       debug: 3,
     });
   
     let localStream;
     let room;
     peer.on('open', () => {
+      console.log(peer.id);
+      
       $('#my-id').text(peer.id);
       // Get things started
       step1();
@@ -27,7 +32,7 @@ $(function() {
       if (!roomName) {
         return;
       }
-      room = peer.joinRoom('sfu_video_' + roomName, {mode: 'sfu', stream: localStream});
+      room = peer.joinRoom('sfu_video_' + roomName, { mode: 'sfu', stream: localStream });
   
       $('#room-id').text(roomName);
       step3(room);
@@ -91,8 +96,8 @@ $(function() {
       const audioSource = $('#audioSource').val();
       const videoSource = $('#videoSource').val();
       const constraints = {
-        audio: {deviceId: audioSource ? {exact: audioSource} : undefined},
-        video: {deviceId: videoSource ? {exact: videoSource} : undefined},
+        audio: { deviceId: audioSource ? { exact: audioSource } : undefined },
+        video: { deviceId: videoSource ? { exact: videoSource } : undefined },
       };
   
       navigator.mediaDevices.getUserMedia(constraints).then(stream => {
@@ -125,9 +130,9 @@ $(function() {
         const id = 'video_' + peerId + '_' + stream.id.replace('{', '').replace('}', '');
   
         $('#their-videos').append($(
-          '<div class="video_' + peerId +'" id="' + id + '">' +
-            '<label>' + stream.peerId + ':' + stream.id + '</label>' +
-            '<video class="remoteVideos" autoplay playsinline>' +
+          '<div class="video_' + peerId + '" id="' + id + '">' +
+          '<label>' + stream.peerId + ':' + stream.id + '</label>' +
+          '<video class="remoteVideos" autoplay playsinline>' +
           '</div>'));
         const el = $('#' + id).find('video').get(0);
         el.srcObject = stream;
@@ -147,4 +152,5 @@ $(function() {
       $('#step1, #step2').hide();
       $('#step3').show();
     }
+  });
   });
