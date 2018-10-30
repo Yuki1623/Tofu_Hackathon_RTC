@@ -19,8 +19,8 @@ $('#makeName').on('click', function () {
             let h = d.getHours();
             let m = d.getMinutes();
             let time = h + ':' + m;
-            var msg = $('#msg').val();
-            var o = {
+            let msg = $('#msg').val();
+            let o = {
                 sendTime: time,
                 cont:msg
             }
@@ -32,7 +32,7 @@ $('#makeName').on('click', function () {
 
         // チャットを受信
         room.on('data', function (data) {
-            chatlog('ID: ' + data.src + '> ' + data.data + '  |  ' + data.time); // data.src = 送信者のpeerid, data.data = 送信されたメッセージ
+            chatlog('ユーザーname: ' + data.src + '> ' + data.data + '  |  ' + data.time); // data.src = 送信者のpeerid, data.data = 送信されたメッセージ
         });
     });
 
