@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>SkyWay SFURoom テキストチャット</title>
+    <link rel="stylesheet" href="taiga_index.css">
 </head>
 
 <body>
@@ -60,7 +61,13 @@
     <div id="chatLog">
     </div>
 
-    <script type="text/javascript" src="https://cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
+    <div class="overflow" id="overflow">
+        ユーザーネームを入れてね(半角英字):<input type="text" id="inputMyName">
+        <button id="makeName">ユーザーネーム確定</button>
+    </div>
+
+    <!-- <script type="text/javascript" src="https://cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script> -->
+    <script src="skyway.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="script.js"></script>
     <script type="text/javascript" src="video.js"></script>
