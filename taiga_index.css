@@ -1,6 +1,8 @@
 .overflow{
-  width: 500px;
-  height: 500px;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
   background-color: #555;
   color: #eee;
 }

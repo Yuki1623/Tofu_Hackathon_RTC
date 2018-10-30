@@ -2,14 +2,10 @@
 $('#makeName').on('click', function () {
     const $myName =$('#inputMyName').val();
     $('#overflow').remove();
-    
     const peer = new Peer($myName,{
         key: '509e8d12-793a-4daa-90c4-f077b66b066b', // 自分のAPIキーを入力
         debug: 3
     });
-    
-
-    
     // 入室
     let room = null;
     $('#join').click(function () {
