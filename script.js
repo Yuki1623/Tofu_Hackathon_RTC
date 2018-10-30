@@ -31,7 +31,6 @@ $('#makeName').on('click', function () {
             chatlog('自分> ' + o.cont + '  |  ' + o.sendTime);
             $('#msg').val("");
         });
-
         // チャットを受信
         room.on('data', function (data) {
             chatlog('ユーザーname: ' + data.src + '> ' + data.data + '  |  ' + data.time); // data.src = 送信者のpeerid, data.data = 送信されたメッセージ

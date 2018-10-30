@@ -1,5 +1,6 @@
 /* eslint-disable require-jsdoc */
 $(function () {
+
   $('#makeName').on('click', () => {
     const $myName = $('#inputMyName').val();
     $('#overflow').hide();
@@ -29,10 +30,11 @@ $(function () {
       if (!roomName) {
         return;
       }
-      room = peer.joinRoom('sfu_video_' + roomName, { mode: 'sfu', stream: localStream });
+      room = peer.joinRoom(roomName, { mode: 'sfu', stream: localStream });
   
       $('#room-id').text(roomName);
       step3(room);
+      chatlog('入室しました');
     });
   
     $('#end-call').on('click', () => {
@@ -41,10 +43,6 @@ $(function () {
     });
   
     // Retry if getUserMedia fails
-    $('#step1-retry').on('click', () => {
-      $('#step1-error').hide();
-      step1();
-    });
   
     // set up audio and video input selectors
     const audioSelect = $('#audioSource');
@@ -148,6 +146,31 @@ $(function () {
       });
       $('#step1, #step2').hide();
       $('#step3').show();
+
+      room.on('data', function (data) {
+        chatlog('ユーザーname: ' + data.src + '> ' + data.data + '  |  ' + data.time); // data.src = 送信者のpeerid, data.data = 送信されたメッセージ
+      });
+    }
+    $('#send').click(function () {
+      let d = new Date();
+      let h = d.getHours();
+      let m = d.getMinutes();
+      let s = d.getSeconds();
+      let time = h + ':' + m + ':' + s;
+      let msg = $('#msg').val();
+
+      let o = {
+        sendTime: time,
+        cont: msg
+      }
+      room.send(o);
+
+      chatlog('自分> ' + o.cont + '  |  ' + o.sendTime);
+      $('#msg').val("");
+    });
+    //チャット関数
+    function chatlog(msg) {
+      $('#chatLog').append('<p>' + msg + '</p>');
     }
   });
   });
