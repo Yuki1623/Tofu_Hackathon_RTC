@@ -1,4 +1,6 @@
 // peerオブジェクト
+
+
 $('#makeName').on('click', function () {
     const $myName =$('#inputMyName').val();
     $('#overflow').remove();
@@ -11,7 +13,6 @@ $('#makeName').on('click', function () {
     $('#join').click(function () {
         room = peer.joinRoom($('#roomName').val(), { mode: 'sfu' });
         chatlog('<i>' + $('#roomName').val() + '</i>に入室しました');
-        chatlog('きましたよ。');
         // チャットを送信
         $('#send').click(function () {
             var msg = $('#msg').val();
