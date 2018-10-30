@@ -6,11 +6,6 @@
     <title>SkyWay SFURoom テキストチャット</title>
     <link rel="stylesheet" href="taiga_index.css">
     <link rel="stylesheet" href="fusa.css">
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
-    <script type="text/javascript" src="script.js"></script>
-    <script type="text/javascript" src="video.js"></script>
-
 </head>
 
 <body>
@@ -88,9 +83,24 @@
     </div>
 
     <!-- <script type="text/javascript" src="https://cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBUpIV-sxgTWNdUal2Q9Mx7FwJ91uSK-Mo",
+            authDomain: "tofurtc.firebaseapp.com",
+            databaseURL: "https://tofurtc.firebaseio.com",
+            projectId: "tofurtc",
+            storageBucket: "tofurtc.appspot.com",
+            messagingSenderId: "542366490475"
+        };
+        firebase.initializeApp(config);
+    </script>
     <script src="skyway.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="video.js"></script>
+
 </body>
 </body>
 
