@@ -15579,6 +15579,7 @@ class room_Room extends events_default.a {
    */
   handleData(dataMessage) {
     const message = {
+      time: dataMessage.time,
       data: dataMessage.data,
       src: dataMessage.src,
     };
@@ -15955,9 +15956,9 @@ class sfuRoom_SFURoom extends peer_room {
     }
 
     const message = {
-      // tiem: 
+      time:data.sendTime,
       roomName: this.name,
-      data: data,
+      data: data.cont,
     };
     this.emit(sfuRoom_SFURoom.MESSAGE_EVENTS.broadcast.key, message);
   }

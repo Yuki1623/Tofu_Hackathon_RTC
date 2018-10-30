@@ -19,16 +19,20 @@ $('#makeName').on('click', function () {
             let h = d.getHours();
             let m = d.getMinutes();
             let time = h + ':' + m;
+            var msg = $('#msg').val();
+            var o = {
+                sendTime: time,
+                cont:msg
+            }
+            room.send(o);
             
-            var msg = $('#msg').val() + ' | ' +time;
-            room.send(msg);
             chatlog('自分> ' + msg);
             $('#msg').val("");
         });
 
         // チャットを受信
         room.on('data', function (data) {
-            chatlog('ID: ' + data.src + '> ' + data.data); // data.src = 送信者のpeerid, data.data = 送信されたメッセージ
+            chatlog('ID: ' + data.src + '> ' + data.data + '  |  ' + data.time); // data.src = 送信者のpeerid, data.data = 送信されたメッセージ
         });
     });
 
