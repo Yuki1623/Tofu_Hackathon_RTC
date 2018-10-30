@@ -18,15 +18,17 @@ $('#makeName').on('click', function () {
             let d = new Date();
             let h = d.getHours();
             let m = d.getMinutes();
-            let time = h + ':' + m;
+            let s = d.getSeconds();
+            let time = h + ':' + m + ':' + s;
             let msg = $('#msg').val();
+
             let o = {
                 sendTime: time,
                 cont:msg
             }
             room.send(o);
             
-            chatlog('自分> ' + msg);
+            chatlog('自分> ' + o.cont + '  |  ' + o.sendTime);
             $('#msg').val("");
         });
 
