@@ -121,6 +121,7 @@ $(function () {
     function step3(room) {
       // Wait for stream on the call, then set peer video display
       room.on('stream', stream => {
+        debugger;
         const peerId = stream.peerId;
         const id = 'video_' + peerId + '_' + stream.id.replace('{', '').replace('}', '');
   
@@ -144,8 +145,8 @@ $(function () {
       room.on('peerLeave', peerId => {
         $('.video_' + peerId).remove();
       });
-      $('#step1, #step2').hide();
-      $('#step3').show();
+      // $('#step1, #step2').hide();
+      // $('#step3').show();
 
       room.on('data', function (data) {
         chatlog('ユーザーname: ' + data.src + '> ' + data.data + '  |  ' + data.time); // data.src = 送信者のpeerid, data.data = 送信されたメッセージ
