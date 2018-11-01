@@ -1,12 +1,44 @@
-.overflow{
-  position: absolute;
-  top: 0;
+.wrapper{
   width: 100vw;
   height: 100vh;
-  background-color: #555;
-  color: #eee;
+  overflow: hidden;
+  background-color: #2fe6a0;
 }
 
-/* .msgCont{
-  display: hidden;
-} */
+.flexBox{
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.pure-u-2-3{
+  height: 80vh;
+  width: 40vw;
+  background-color: #eff;
+  border-radius: 10px;
+}
+
+.video{
+  height: 23vh;
+  width: 80%;
+  margin: auto;
+  background-color: red;
+  margin-bottom: 30px;
+}
+
+.my-video{
+  height: 23vh;
+  width: 80%;
+  margin: auto;
+  background-color: aqua;
+}
+
+.overFlow{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 90vw;
+  height: 90vh;
+  background-color: #333;
+}

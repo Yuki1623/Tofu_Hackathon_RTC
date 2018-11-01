@@ -27,7 +27,7 @@ $('#makeName').on('click', function () {
                 cont:msg
             }
             room.send(o);
-            
+
             chatlog('自分> ' + o.cont + '  |  ' + o.sendTime);
             $('#msg').val("");
         });
