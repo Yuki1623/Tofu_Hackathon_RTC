@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,29 +9,45 @@
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="taiga_index.css">
 </head>
+
 <body>
     <div class="wrapper">
-        <header><h1 id="roomTtl">~~~~</h1></header>
+        <header>
+            <h1 id="roomTtl">~~~~</h1>
+        </header>
         <div class="flexBox">
-            <div class="pure-u-2-3" id="video-container">
-                <div id="their-videos">
-                    <div class="video" id="videoOther">
-                        <video class="remoteVideo autoplay playsinline"></video>
+            <div class="leftBox">
+                <div class="pure-u-2-3" id="video-container">
+                    <div id="their-videos">
+                        <div class="video" id="videoOther">
+                            <video class="remoteVideo autoplay playsinline"></video>
+                        </div>
+                        <!-- <div class="video" id="video_01">
+                            <video class="remoteVideo autoplay playsinline"></video>
+                        </div> -->
                     </div>
-                    <!-- <div class="video" id="video_01">
-                        <video class="remoteVideo autoplay playsinline"></video>
-                    </div> -->
+                    <div class="my-video">
+                        <label id="my-label"></label>
+                        <video id="my-video" muted="true" autoplay playsinline></video>
+                    </div>
                 </div>
-                <div class="my-video">
-                    <label id="my-label"></label>
-                    <video id="my-video" muted="true" autoplay playsinline></video>
+
+                <div class="msgCont" id="#msgCont">
+                    <div class="msgCont__inputBox">
+                        <input id="inputMsg" type="text">
+                        <button id="sendMsg"></button>
+                    </div>
+
+                    <div id="showMsg"></div>
                 </div>
             </div>
 
             <div class="rightBox">
-                
+
                 <button>メイン</button>
-                <button>チャット</button>
+                <a src="#msgCont">
+                    <button>チャット</button>
+                </a>
                 <button>仕様書</button>
             </div>
         </div>
@@ -44,4 +61,5 @@
     <script src="./jquery.js"></script>
     <script src="./taiga_script.js"></script>
 </body>
+
 </html>

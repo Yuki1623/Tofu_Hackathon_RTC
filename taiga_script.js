@@ -8,22 +8,22 @@ $(function () {
     key: '509e8d12-793a-4daa-90c4-f077b66b066b',
     debug: 3
   });
-  
+
   peer.on('open', function () {
     console.log('peerIDを発行しました');
     $('#my-label').text(peer.id);
   });
-  
+
   peer.on('error', function (err) {
     alert(err.message);
   });
-  
+
   peer.on('close', function () {
     console.log('相手との接続が切れました。');
   });
 
-  
-  
+
+
   function myVideoSetUp() {
 
     navigator.mediaDevices.getUserMedia({ video: { width: 320, height: 180 }, audio: true })
@@ -60,6 +60,10 @@ $(function () {
     });
   }
 
+  function message(msg) {
+    $('#showMsg').append('<p>' + msg + '</p>');
+  }
+
   // roomにアクセス
   $('#access').on('click', e => {
     myVideoSetUp();
@@ -75,6 +79,33 @@ $(function () {
     $('#roomTtl').text(roomName);
     room = peer.joinRoom(roomName, { mode: 'sfu', stream: localStream });
     conect(room);
+
+    //チャット機能
+    //送る
+    $('#sendMsg').on('click', () => {
+      let d = new Date();
+      let h = d.getHours();
+      let m = d.getMinutes();
+      let s = d.getSeconds();
+      let time = h + ':' + m + ':' + s;
+      let msg = $('#inputMsg').val();
+
+      let o = {
+        sendTime: time,
+        cont: msg
+      }
+      room.send(o);
+
+      message('自分> ' + o.cont + '  |  ' + o.sendTime);
+      $('#inputMsg').val("");
+    });
+
+    // 受信
+    room.on('data', d => {
+      message('ユーザーname: ' + d.src + '> ' + d.data + '  |  ' + d.time);
+    });
+
+
   });
 
 });

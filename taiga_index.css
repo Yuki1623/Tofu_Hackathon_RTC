@@ -13,6 +13,8 @@
 }
 
 .pure-u-2-3{
+  position: absolute;
+  top: 0;
   height: 80vh;
   width: 40vw;
   background-color: #eff;
@@ -41,4 +43,21 @@
   width: 90vw;
   height: 90vh;
   background-color: #333;
+}
+
+.leftBox{
+  position: relative;
+  width: 40vw;
+  height: 80vh;
+  overflow: hidden;
+}
+
+.msgCont{
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  height: 80vh;
+  width: 40vw;
+  background-color: #aaa;
+  overflow: scroll;
 }
