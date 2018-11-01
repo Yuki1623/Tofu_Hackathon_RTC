@@ -66,7 +66,7 @@ $(function () {
   // roomにアクセス
   $('#access').on('click', e => {
     myVideoSetUp();
-    e.preventDefault();
+    // e.preventDefault();
     const roomName = $('#roomName').val();
 
     $('.overFlow').hide();
