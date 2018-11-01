@@ -17,7 +17,7 @@
         </header>
         <div class="flexBox">
             <div class="leftBox">
-                <div class="pure-u-2-3" id="video-container">
+                <div class="pure-u-2-3 zindex" id="video-container">
                     <div id="their-videos">
                         <div class="video" id="videoOther">
                             <video class="remoteVideo autoplay playsinline"></video>
@@ -27,28 +27,32 @@
                         </div> -->
                     </div>
                     <div class="my-video">
-                        <label id="my-label"></label>
+                        <p id="my-label"></p>
                         <video id="my-video" muted="true" autoplay playsinline></video>
                     </div>
                 </div>
 
-                <div class="msgCont" id="#msgCont">
+                <div class="msgCont" id="msgCont">
                     <div class="msgCont__inputBox">
                         <input id="inputMsg" type="text">
                         <button id="sendMsg"></button>
                     </div>
-
                     <div id="showMsg"></div>
+                </div>
+
+                <div id="specificationCont" class="specificationCont">
+                    <div class="showspecificationCont">~~~</div>
+                    <div class="showspecificationInputBox">
+                        <input type="text" id="showspecificationTxt" class="showspecificationTxt">
+                        <button id="showspecificationSend"></button>
+                    </div>
                 </div>
             </div>
 
             <div class="rightBox">
-
-                <button>メイン</button>
-                <a src="#msgCont">
-                    <button>チャット</button>
-                </a>
-                <button>仕様書</button>
+                <button id="mainBtn">メイン</button>
+                <button id="msgBtn">チャット</button>
+                <button id="specificationBtn">仕様書</button>
             </div>
         </div>
 

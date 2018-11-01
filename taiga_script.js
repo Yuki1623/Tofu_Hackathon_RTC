@@ -41,7 +41,6 @@ $(function () {
   }
 
   function conect(room) {
-    console.log(room);
     room.on('stream', s => {
       const peerId = s.peerId;
       const id = 'video_' + peerId + '_' + s.id.replace('{', '').replace('}', '');
@@ -76,7 +75,7 @@ $(function () {
       return;
     }
 
-    $('#roomTtl').text(roomName);
+    $('#roomTtl').text('ルームネーム  :  ' + roomName);
     room = peer.joinRoom(roomName, { mode: 'sfu', stream: localStream });
     conect(room);
 
@@ -106,6 +105,24 @@ $(function () {
     });
 
 
+  });
+
+  $('#mainBtn').on('click', e => {
+    $('#video-container').addClass('zindex');
+    $('#msgCont').removeClass('zindex');
+    $('#specificationCont').removeClass('zindex');
+  });
+
+  $('#msgBtn').on('click', e => {
+    $('#msgCont').addClass('zindex');
+    $('#video-container').removeClass('zindex');
+    $('#specificationCont').removeClass('zindex');
+  })
+
+  $('#specificationBtn').on('click', e => {
+    $('#specificationCont').addClass('zindex');
+    $('#msgCont').removeClass('zindex');
+    $('#video-container').removeClass('zindex');
   });
 
 });
