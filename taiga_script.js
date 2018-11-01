@@ -173,9 +173,9 @@ $(function(){
         }
     
         ss.start({
-          width:     $('#Width').val(),
-          height:    $('#Height').val(),
-          frameRate: $('#FrameRate').val(),
+          width:     320,
+          height:    180,
+          frameRate: 30,
         })
           .then(stream => {
             $('#my-video')[0].srcObject = stream;
