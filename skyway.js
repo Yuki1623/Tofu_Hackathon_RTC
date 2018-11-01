@@ -15954,8 +15954,7 @@ class sfuRoom_SFURoom extends peer_room {
     if (!this._open) {
       return;
     }
-    
-    debugger;
+
     let message = null;
     if ($.isPlainObject(data)) {
       message = {

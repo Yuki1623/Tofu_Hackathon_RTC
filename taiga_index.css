@@ -63,6 +63,7 @@ header{
   width: 300px;
   height: 60px;
   margin-right: 50px;
+  border: none;
 }
 
 button{
@@ -72,6 +73,11 @@ button{
   border-radius: 30px;
   border: none;
   font-weight: bold;
+}
+
+button:hover{
+  background-color: #79BD9A;
+  color: #efefef;
 }
 
 .leftBox{
@@ -167,7 +173,12 @@ button{
 
 .btn__flexBox{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.btn__flexBox button{
+  margin: 5px;
 }
 
 .rightBox{
@@ -175,6 +186,7 @@ button{
   flex-direction: column;
   justify-content: space-between;
   height: 80vh;
+  width: 40vw;
 }
 
 .time{
