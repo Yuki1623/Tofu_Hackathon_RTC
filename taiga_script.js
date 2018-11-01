@@ -99,9 +99,31 @@ $(function () {
       $('#inputMsg').val("");
     });
 
+    $('#timeSend').on('click', e => {
+      let timerNumber = $('#timeInput').val();
+      if ($.isNumeric(timerNumber)) {
+        room.send(timerNumber);
+        $('#timer').startTimer({
+          onComplete: function (element) {
+          }
+        });
+      } else {
+        alert('半角数字でお願いします。');
+        $('#timeInput').val("");
+      }
+    });
+
     // 受信
     room.on('data', d => {
-      message('ユーザーname: ' + d.src + '> ' + d.data + '  |  ' + d.time);
+      if (d.data === null) {
+        $('#timer').attr('data-minutes-left', d.time);
+        $('#timer').startTimer({
+          onComplete: function (element) {
+          }
+        });
+      } else {
+        message('ユーザーname: ' + d.src + '> ' + d.data + '  |  ' + d.time);
+      }
     });
 
 

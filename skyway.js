@@ -15954,12 +15954,24 @@ class sfuRoom_SFURoom extends peer_room {
     if (!this._open) {
       return;
     }
+    
+    debugger;
+    let message = null;
+    if ($.isPlainObject(data)) {
+      message = {
+        time: data.sendTime,
+        roomName: this.name,
+        data: data.cont,
+      };
+    } else {
+      message = {
+        time: data,
+        roomName: this.name,
+        data:null
+      }
+    }
 
-    const message = {
-      time:data.sendTime,
-      roomName: this.name,
-      data: data.cont,
-    };
+    
     this.emit(sfuRoom_SFURoom.MESSAGE_EVENTS.broadcast.key, message);
   }
 
