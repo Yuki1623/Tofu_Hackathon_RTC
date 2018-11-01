@@ -103,8 +103,12 @@ $(function () {
       let timerNumber = $('#timeInput').val();
       if ($.isNumeric(timerNumber)) {
         room.send(timerNumber);
+        $('#timer').attr('data-minutes-left', timerNumber);
+        $('#timeInputBox').hide();
         $('#timer').startTimer({
           onComplete: function (element) {
+            $('#timeInputBox').show();
+            $('#timer').empty();
           }
         });
       } else {
@@ -117,8 +121,11 @@ $(function () {
     room.on('data', d => {
       if (d.data === null) {
         $('#timer').attr('data-minutes-left', d.time);
+        $('#timeInputBox').hide();
         $('#timer').startTimer({
           onComplete: function (element) {
+            $('#timeInputBox').show();
+            $('#timer').empty();
           }
         });
       } else {
