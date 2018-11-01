@@ -8,8 +8,9 @@
 .flexBox{
   height: 90vh;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  margin: 0 100px;
 }
 
 header{
@@ -78,6 +79,31 @@ header{
   top: 0;
   height: 80vh;
   width: 40vw;
-  background-color: red;
+  background-color: #efefef;
   border-radius: 20px;
+}
+
+.specification__imgCont{
+  height: 70vh;
+  width: 36vw;
+  margin: auto;
+  overflow-y: scroll;
+}
+
+.specification__imgCont img{
+  width: 35vw;
+  height: auto;
+}
+/* .specification__link{
+} */
+
+button{
+  display: inline;
+}
+
+.specification__flexBox{
+  height: 100%;
+  display: none;
+  align-items: center;
+  flex-direction: column;
 }

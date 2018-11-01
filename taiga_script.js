@@ -125,4 +125,8 @@ $(function () {
     $('#video-container').removeClass('zindex');
   });
 
+  $('#specification_00').on('click', e => {
+    $('#specification__flexBox').css('display', 'flex');
+    $('#specificationCont').find('button').hide();
+  });
 });
