@@ -15,6 +15,7 @@
 .pure-u-2-3{
   position: absolute;
   top: 0;
+  z-index: 10;
   height: 80vh;
   width: 40vw;
   background-color: #eff;
@@ -30,8 +31,6 @@
 }
 
 .my-video{
-  height: 23vh;
-  width: 80%;
   margin: auto;
   background-color: aqua;
 }
@@ -55,7 +54,7 @@
 .msgCont{
   position: absolute;
   top: 0;
-  z-index: 10;
+  /* z-index: 10; */
   height: 80vh;
   width: 40vw;
   background-color: #aaa;
