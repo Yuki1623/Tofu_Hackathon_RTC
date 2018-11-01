@@ -30,11 +30,13 @@
                 </div>
 
                 <div class="msgCont" id="msgCont">
-                    <div class="msgCont__inputBox">
-                        <input id="inputMsg" type="text">
-                        <button id="sendMsg"></button>
+                    <div class="msgCont__inner">
+                        <div id="showMsg" class="showMsg"></div>
+                        <div class="msgCont__inputBox">
+                            <input id="inputMsg" type="text">
+                            <button id="sendMsg">送信</button>
+                        </div>
                     </div>
-                    <div id="showMsg"></div>
                 </div>
 
                 <div id="specificationCont" class="specificationCont">
@@ -53,9 +55,16 @@
             </div>
 
             <div class="rightBox">
-                <button id="mainBtn">メイン</button>
-                <button id="msgBtn">チャット</button>
-                <button id="specificationBtn">仕様書</button>
+                <div class="mainDisplay">
+
+                </div>
+                <div class="btn__flexBox">
+                    <button id="mainBtn">メイン</button>
+                    <button id="msgBtn">チャット</button>
+                    <button id="specificationBtn">仕様書</button>
+                </div>
+                <div class="time"></div>
+                <div class="timeBar"></div>
             </div>
         </div>
 
@@ -66,6 +75,7 @@
     </div>
     <script src="./skyway.js"></script>
     <script src="./jquery.js"></script>
+    <script src="./jquery.simple.timer.js"></script>
     <script src="./taiga_script.js"></script>
 </body>
 
