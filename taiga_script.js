@@ -42,8 +42,8 @@ $(function () {
 
   function conect(room) {
     room.on('stream', s => {
-      const peerId = s.peerId;
-      const id = 'video_' + peerId + '_' + s.id.replace('{', '').replace('}', '');
+      // const peerId = s.peerId;
+      // const id = 'video_' + peerId + '_' + s.id.replace('{', '').replace('}', '');
       const el = $('#videoOther').find('video').get(0);
       el.srcObject = s;
       el.play();
