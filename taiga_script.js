@@ -1,13 +1,21 @@
 $(function () {
+  let devPeer = null;
   let peer = null;
   let room = null;
   let existingCall = null;
   let localStream = null;
 
+  devPeer = new Peer({
+    key: '509e8d12-793a-4daa-90c4-f077b66b066b',
+    debug: 3
+  });
+  debugger;
+
   peer = new Peer({
     key: '509e8d12-793a-4daa-90c4-f077b66b066b',
     debug: 3
   });
+
 
   peer.on('open', function () {
     console.log('peerIDを発行しました');
@@ -49,11 +57,11 @@ $(function () {
 
     room.on('removeStream', s => {
       const peerId = s.peerId;
-      $('#video_' + peerId + '_' + s.id.replace('{', '').replace('}', '')).remove();
     });
 
     room.on('peerJoin', s => {
       console.log(s);
+
     });
   }
 
@@ -74,7 +82,10 @@ $(function () {
     }
 
     $('#roomTtl').text('ルームネーム  :  ' + roomName);
+    debugger;
+    devRoom = devPeer.joinRoom(roomName, { mode: 'sfu', stream: localStream });
     room = peer.joinRoom(roomName, { mode: 'sfu', stream: localStream });
+    conect(devRoom);
     conect(room);
 
     //チャット機能
