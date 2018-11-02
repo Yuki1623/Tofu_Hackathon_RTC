@@ -26,7 +26,7 @@ $(function () {
 
   function myVideoSetUp() {
 
-    navigator.mediaDevices.getUserMedia({ video: { width: 320, height: 180 }, audio: true })
+    navigator.mediaDevices.getUserMedia({ video: { width: 580, height: 326 }, audio: true })
       .then(function (stream) {
         $('#my-video').get(0).srcObject = stream;
         localStream = stream;
@@ -42,8 +42,6 @@ $(function () {
 
   function conect(room) {
     room.on('stream', s => {
-      // const peerId = s.peerId;
-      // const id = 'video_' + peerId + '_' + s.id.replace('{', '').replace('}', '');
       const el = $('#videoOther').find('video').get(0);
       el.srcObject = s;
       el.play();
