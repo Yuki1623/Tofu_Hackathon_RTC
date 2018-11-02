@@ -1,24 +1,14 @@
 $(function () {
-  let devPeer = null;
-  let devId = null;
   let peer = null;
   let room = null;
   let existingCall = null;
   let localStream = null;
-
-  devPeer = new Peer({
-    key: '509e8d12-793a-4daa-90c4-f077b66b066b',
-    debug: 3
-  });
 
   peer = new Peer({
     key: '509e8d12-793a-4daa-90c4-f077b66b066b',
     debug: 3
   });
 
-  devPeer.on('open', () => {
-    devId = devPeer.id;
-  });
 
 
   peer.on('open', function () {
@@ -36,7 +26,7 @@ $(function () {
 
 
 
-  function myVideoSetUp() {
+  const myVideoSetUp = () => {
 
     navigator.mediaDevices.getUserMedia({ video: { width: 580, height: 326 }, audio: true })
       .then(function (stream) {
@@ -52,14 +42,26 @@ $(function () {
       });
   }
 
-  function conect(room) {
-    if (room._peerIdtion == devId) {
-      room.close();
-    }
+  const conect = room => {
     room.on('stream', s => {
-      const el = $('#videoOther').find('video').get(0);
-      el.srcObject = s;
-      el.play();
+      $('#videoOther').find('video').get(0).srcObject = s;
+      $('#videoOther').find('video').get(0).play();
+    });
+
+    // 受信
+    room.on('data', d => {
+      if (d.data === null) {
+        $('#timer').attr('data-minutes-left', d.time);
+        $('#timeInputBox').hide();
+        $('#timer').startTimer({
+          onComplete: function (element) {
+            $('#timeInputBox').show();
+            $('#timer').empty();
+          }
+        });
+      } else {
+        message('ユーザーname: ' + d.src + '> ' + d.data + '  |  ' + d.time);
+      }
     });
 
     room.on('removeStream', s => {
@@ -71,27 +73,33 @@ $(function () {
     });
   }
 
-  function message(msg) {
+  const message = msg => {
     $('#showMsg').append('<p>' + msg + '</p>');
   }
+
+  $('#onemore').on('click', () => {
+    room.close();
+    myVideoSetUp();
+    room = peer.joinRoom('sfu_video_' + roomName, {
+      mode: 'sfu', stream: localStream
+    });
+    conect(room);
+  });
 
   // roomにアクセス
   $('#access').on('click', e => {
     myVideoSetUp();
-    // e.preventDefault();
+    e.preventDefault();
     const roomName = $('#roomName').val();
 
     $('.overFlow').hide();
-    // roomNameが未入力の場合ウォッチ終了
     if (!roomName) {
       return;
     }
 
     $('#roomTtl').text('ルームネーム  :  ' + roomName);
-    devRoom = devPeer.joinRoom(roomName, { mode: 'sfu', stream: localStream });
-    room = peer.joinRoom(roomName, { mode: 'sfu', stream: localStream });
+    room = peer.joinRoom('sfu_video_' + roomName, { mode: 'sfu', stream: localStream });
     conect(room);
-    conect(devRoom);
 
     //チャット機能
     //送る
@@ -128,22 +136,6 @@ $(function () {
       } else {
         alert('半角数字でお願いします。');
         $('#timeInput').val("");
-      }
-    });
-
-    // 受信
-    room.on('data', d => {
-      if (d.data === null) {
-        $('#timer').attr('data-minutes-left', d.time);
-        $('#timeInputBox').hide();
-        $('#timer').startTimer({
-          onComplete: function (element) {
-            $('#timeInputBox').show();
-            $('#timer').empty();
-          }
-        });
-      } else {
-        message('ユーザーname: ' + d.src + '> ' + d.data + '  |  ' + d.time);
       }
     });
 
