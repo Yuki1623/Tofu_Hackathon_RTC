@@ -5,12 +5,10 @@ $(function () {
   let existingCall = null;
   let localStream = null;
 
-  devPeer = new Peer({
+  devPeer = new Peer('dev', {
     key: '509e8d12-793a-4daa-90c4-f077b66b066b',
     debug: 3
   });
-  debugger;
-
   peer = new Peer({
     key: '509e8d12-793a-4daa-90c4-f077b66b066b',
     debug: 3
@@ -82,7 +80,6 @@ $(function () {
     }
 
     $('#roomTtl').text('ルームネーム  :  ' + roomName);
-    debugger;
     devRoom = devPeer.joinRoom(roomName, { mode: 'sfu', stream: localStream });
     room = peer.joinRoom(roomName, { mode: 'sfu', stream: localStream });
     conect(devRoom);
