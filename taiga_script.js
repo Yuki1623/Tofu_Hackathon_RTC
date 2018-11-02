@@ -3,6 +3,7 @@ $(function () {
   let room = null;
   let existingCall = null;
   let localStream = null;
+  const ss = ScreenShare.create({ debug: true });
 
   peer = new Peer({
     key: '509e8d12-793a-4daa-90c4-f077b66b066b',
@@ -27,11 +28,11 @@ $(function () {
 
 
   const myVideoSetUp = () => {
-
     navigator.mediaDevices.getUserMedia({ video: { width: 580, height: 326 }, audio: true })
       .then(function (stream) {
         $('#my-video').get(0).srcObject = stream;
         localStream = stream;
+
         if (room) {
           room.replaceStream(stream);
           return;
@@ -77,12 +78,39 @@ $(function () {
     $('#showMsg').append('<p>' + msg + '</p>');
   }
 
+  const ssStart = object => {
+    ss.start(object).then(s => {
+      $('#my-video').get(0).srcObject = s;
+      localStream = s;
+      room = peer.joinRoom('sfu_video_' + roomName, { mode: 'sfu', stream: localStream });
+    }).catch(error => {
+      console.log(error);
+    });
+  };
+
+
+  //ここ
+  $('#start-screen').on('click', () => {
+    room.close();
+    if (ss.isScreenShareAvailable() === false) {
+      alert('Screen Share cannot be used. Please install the Chrome extension.');
+      return;
+    }
+    ssStart({
+      width: 580,
+      height: 326,
+      frameRate: 30,
+    });
+    conect(room);
+  });
+
+  $('#myFace').on('click', () => {
+    myVideoSetUp();
+  });
+
   $('#onemore').on('click', () => {
     room.close();
-    myVideoSetUp();
-    room = peer.joinRoom('sfu_video_' + roomName, {
-      mode: 'sfu', stream: localStream
-    });
+    room = peer.joinRoom('sfu_video_' + roomName, { mode: 'sfu', stream: localStream });
     conect(room);
   });
 
@@ -173,39 +201,5 @@ $(function () {
   $('#specification_02').on('click', e => {
     $('#specification__flexBox02').css('display', 'flex');
     $('#specificationCont').find('button').hide();
-  });
-});
-
-
-//ss機能
-
-const ss = ScreenShare.create({ debug: true });
-
-$(function () {
-  $('#start-screen').on('click', () => {
-    if (ss.isScreenShareAvailable() === false) {
-      alert('Screen Share cannot be used. Please install the Chrome extension.');
-      return;
-    }
-
-    ss.start({
-      width: 320,
-      height: 180,
-      frameRate: 30,
-    })
-      .then(stream => {
-        $('#my-video')[0].srcObject = stream;
-
-        if (existingCall !== null) {
-          const peerid = existingCall.peer;
-          existingCall.close();
-          const call = peer.call(peerid, stream);
-          step3(call);
-        }
-        localStream = stream;
-      })
-      .catch(error => {
-        console.log(error);
-      });
   });
 });
