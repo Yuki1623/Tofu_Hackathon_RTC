@@ -15976,10 +15976,6 @@ class sfuRoom_SFURoom extends peer_room {
       }
     }
 
-    //コネクト情報を送る
-    // コネクト情報を受けて、conectCOntを表示したい。
-
-    
     this.emit(sfuRoom_SFURoom.MESSAGE_EVENTS.broadcast.key, message);
   }
 

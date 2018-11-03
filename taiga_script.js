@@ -13,8 +13,6 @@ $(function () {
     debug: 3
   });
 
-
-
   peer.on('open', function () {
     console.log('peerIDを発行しました');
     $('#my-label').text(peer.id);
