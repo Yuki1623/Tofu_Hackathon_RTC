@@ -27,7 +27,6 @@ $(function () {
   });
 
   const myVideoSetUp = () => {
-    firstConect = true;
     navigator.mediaDevices.getUserMedia({ video: { width: 1600, height: 900 }, audio: true })
       .then(function (stream) {
         $('#my-video').get(0).srcObject = stream;
@@ -143,6 +142,7 @@ $(function () {
 
   // roomにアクセス
   $('#access').on('click', e => {
+    firstConect = true;
     myVideoSetUp();
     e.preventDefault();
     const roomName = $('#roomName').val();
