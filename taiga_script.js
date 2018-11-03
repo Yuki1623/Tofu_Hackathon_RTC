@@ -5,26 +5,9 @@ $(function () {
   let localStream = null;
   let closeRoom = null;
   let firstConect = false;
+  let userName = null;
 
   const ss = ScreenShare.create({ debug: true });
-
-  peer = new Peer({
-    key: '509e8d12-793a-4daa-90c4-f077b66b066b',
-    debug: 3
-  });
-
-  peer.on('open', function () {
-    console.log('peerIDを発行しました');
-    $('#my-label').text(peer.id);
-  });
-
-  peer.on('error', function (err) {
-    alert(err.message);
-  });
-
-  peer.on('close', function () {
-    console.log('相手との接続が切れました。');
-  });
 
   const myVideoSetUp = () => {
     firstConect = true;
@@ -143,6 +126,24 @@ $(function () {
 
   // roomにアクセス
   $('#access').on('click', e => {
+    peer = new Peer(userName, {
+      key: '509e8d12-793a-4daa-90c4-f077b66b066b',
+      debug: 3
+    });
+
+    peer.on('open', function () {
+      console.log('peerIDを発行しました');
+      $('#my-label').text(peer.id);
+    });
+
+    peer.on('error', function (err) {
+      alert(err.message);
+    });
+
+    peer.on('close', function () {
+      console.log('相手との接続が切れました。');
+    });
+
     myVideoSetUp();
     e.preventDefault();
     const roomName = $('#roomName').val();
