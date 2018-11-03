@@ -15962,13 +15962,22 @@ class sfuRoom_SFURoom extends peer_room {
         roomName: this.name,
         data: data.cont,
       };
-    } else {
+    } else if (data === true) {
+      message = {
+        time: true,
+        roomName: this.name,
+        data: true,
+      }
+    }else {
       message = {
         time: data,
         roomName: this.name,
         data:null
       }
     }
+
+    //コネクト情報を送る
+    // コネクト情報を受けて、conectCOntを表示したい。
 
     
     this.emit(sfuRoom_SFURoom.MESSAGE_EVENTS.broadcast.key, message);

@@ -4,6 +4,7 @@ $(function () {
   let existingCall = null;
   let localStream = null;
   let closeRoom = null;
+  let firstConect = false;
 
   const ss = ScreenShare.create({ debug: true });
 
@@ -28,6 +29,7 @@ $(function () {
   });
 
   const myVideoSetUp = () => {
+    firstConect = true;
     navigator.mediaDevices.getUserMedia({ video: { width: 1600, height: 900 }, audio: true })
       .then(function (stream) {
         $('#my-video').get(0).srcObject = stream;
@@ -60,6 +62,12 @@ $(function () {
             $('#timer').empty();
           }
         });
+      } else if (d.data === true && d.time === true) {
+        if (firstConect === true) {
+          $('#conectCont').css('display', 'flex');
+          $('#conectUser').html(s);
+          firstConect = false;
+        }
       } else {
         message('ユーザーname: ' + d.src + '> ' + d.data + '  |  ' + d.time);
       }
@@ -70,7 +78,11 @@ $(function () {
     });
 
     room.on('peerJoin', s => {
-      console.log('相手のID:' + s);
+      if (firstConect === true) {
+        $('#conectCont').css('display', 'flex');
+        $('#conectUser').html(s);
+        firstConect = false;
+      }
     });
   }
 
@@ -90,8 +102,15 @@ $(function () {
     });
   };
 
+  $('#goConect').on('click', () => {
+    room.send(true);
+    room.close();
+    $('.mainDisplay').show();
+    $('#conectCont').hide();
+    room = peer.joinRoom('sfu_video_' + roomName, { mode: 'sfu', stream: localStream });
+    conect(room);
+  });
 
-  //ここ
   $('#start-screen').on('click', () => {
     room.close();
     if (ss.isScreenShareAvailable() === false) {
@@ -116,8 +135,6 @@ $(function () {
     room.close();
     room = peer.joinRoom('sfu_video_' + roomName, { mode: 'sfu', stream: localStream });
     conect(room);
-    $('.video').addClass('displayCenter');
-    $('.video').removeClass('center');
   });
 
   $('#stopRoom').on('click', () => {
