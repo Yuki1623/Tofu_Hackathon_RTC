@@ -45,6 +45,11 @@ header{
   text-align: center;
 }
 
+#my-video{
+  width: 480px;
+  height: 270px;
+}
+
 .overFlow{
   z-index: 100;
   position: absolute;
@@ -165,12 +170,6 @@ button:hover{
   flex-direction: column;
 }
 
-.mainDisplay{
-  height: 40vh;
-  width: 40vw;
-  background-color: red;
-}
-
 .btn__flexBox{
   display: flex;
   justify-content: space-between;
@@ -201,4 +200,10 @@ button:hover{
   height: 30px;
   background-color: black;
   margin-bottom: 50px;
+}
+
+
+.otherVideo{
+  height: 360px;
+  width: 640px
 }

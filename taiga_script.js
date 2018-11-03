@@ -3,6 +3,8 @@ $(function () {
   let room = null;
   let existingCall = null;
   let localStream = null;
+  let closeRoom = null;
+
   const ss = ScreenShare.create({ debug: true });
 
   peer = new Peer({
@@ -25,10 +27,8 @@ $(function () {
     console.log('相手との接続が切れました。');
   });
 
-
-
   const myVideoSetUp = () => {
-    navigator.mediaDevices.getUserMedia({ video: { width: 580, height: 326 }, audio: true })
+    navigator.mediaDevices.getUserMedia({ video: { width: 1600, height: 900 }, audio: true })
       .then(function (stream) {
         $('#my-video').get(0).srcObject = stream;
         localStream = stream;
@@ -83,6 +83,8 @@ $(function () {
       $('#my-video').get(0).srcObject = s;
       localStream = s;
       room = peer.joinRoom('sfu_video_' + roomName, { mode: 'sfu', stream: localStream });
+      $('.video').addClass('displayCenter');
+      $('.video').removeClass('normal');
     }).catch(error => {
       console.log(error);
     });
@@ -97,8 +99,8 @@ $(function () {
       return;
     }
     ssStart({
-      width: 580,
-      height: 326,
+      width: 1600,
+      height: 900,
       frameRate: 30,
     });
     conect(room);
@@ -106,12 +108,22 @@ $(function () {
 
   $('#myFace').on('click', () => {
     myVideoSetUp();
+    $('.video').addClass('center');
+    $('.video').removeClass('displayCenter');
   });
 
   $('#onemore').on('click', () => {
     room.close();
     room = peer.joinRoom('sfu_video_' + roomName, { mode: 'sfu', stream: localStream });
     conect(room);
+    $('.video').addClass('displayCenter');
+    $('.video').removeClass('center');
+  });
+
+  $('#stopRoom').on('click', () => {
+    room.close();
+    $('#roomName').val("");
+    $('.overFlow').show();
   });
 
   // roomにアクセス
@@ -138,16 +150,15 @@ $(function () {
       let s = d.getSeconds();
       let time = h + ':' + m + ':' + s;
       let msg = $('#inputMsg').val();
-
       let o = {
         sendTime: time,
         cont: msg
       }
       room.send(o);
-
       message('自分> ' + o.cont + '  |  ' + o.sendTime);
       $('#inputMsg').val("");
     });
+
 
     $('#timeSend').on('click', e => {
       let timerNumber = $('#timeInput').val();
