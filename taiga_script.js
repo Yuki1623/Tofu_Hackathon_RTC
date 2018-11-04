@@ -219,13 +219,28 @@ $(function () {
     $('#specificationCont').find('button').hide();
   });
 
+  $('#backBtn00').on('click', () => {
+    $('#specification__flexBox00').hide();
+    $('#specificationCont').find('button').show();
+  });
+
   $('#specification_01').on('click', e => {
     $('#specification__flexBox01').css('display', 'flex');
     $('#specificationCont').find('button').hide();
   });
 
+  $('#backBtn01').on('click', () => {
+    $('#specification__flexBox01').hide();
+    $('#specificationCont').find('button').show();
+  });
+
   $('#specification_02').on('click', e => {
     $('#specification__flexBox02').css('display', 'flex');
     $('#specificationCont').find('button').hide();
+  });
+
+  $('#backBtn02').on('click', () => {
+    $('#specification__flexBox02').hide();
+    $('#specificationCont').find('button').show();
   });
 });
