@@ -23,7 +23,6 @@ $(function () {
   });
 
   peer.on('close', function () {
-    console.log('相手との接続が切れました。');
   });
 
   const myVideoSetUp = () => {
@@ -48,13 +47,24 @@ $(function () {
       $('#videoOther').find('video').get(0).play();
     });
 
+    room.on('peerLeave', e => {
+      if (!firstConect) {
+        console.log('相手との接続が切れました。');
+        $('#timer').empty();
+        $('#timeInputBox').show();
+        firstConect = true;
+        $('.mainDisplay').hide();
+        message('相手との接続が切れましt。');
+      }
+    });
+
     // 受信
     room.on('data', d => {
       if (d.data === null) {
         $('#timer').attr('data-minutes-left', d.time);
         $('#timeInputBox').hide();
         $('#timer').startTimer({
-          onComplete: function (element) {
+          onComplete: function () {
             $('#timeInputBox').show();
             $('#timer').empty();
           }
@@ -63,10 +73,9 @@ $(function () {
         if (firstConect === true) {
           $('#conectCont').css('display', 'flex');
           $('#conectUser').html(s);
-          firstConect = false;
         }
       } else {
-        message('ユーザーname: ' + d.src + '> ' + d.data + '  |  ' + d.time);
+        message('相手: ' + '> ' + d.data + '  |  ' + d.time);
       }
     });
 
@@ -78,7 +87,6 @@ $(function () {
       if (firstConect === true) {
         $('#conectCont').css('display', 'flex');
         $('#conectUser').html(s);
-        firstConect = false;
       }
     });
   }
@@ -100,6 +108,7 @@ $(function () {
   };
 
   $('#goConect').on('click', () => {
+    firstConect = false;
     room.send(true);
     room.close();
     $('.mainDisplay').show();
@@ -134,23 +143,27 @@ $(function () {
     conect(room);
   });
 
+  // roomを抜ける
   $('#stopRoom').on('click', () => {
     room.close();
     $('#roomName').val("");
     $('.overFlow').show();
+    $('#showMsg').empty();
+    $('#timer').empty();
+    $('#timeInputBox').show();
   });
 
   // roomにアクセス
   $('#access').on('click', e => {
-    firstConect = true;
-    myVideoSetUp();
-    e.preventDefault();
     const roomName = $('#roomName').val();
-
-    $('.overFlow').hide();
     if (!roomName) {
       return;
     }
+    firstConect = true;
+    myVideoSetUp();
+    e.preventDefault();
+
+    $('.overFlow').hide();
 
     $('#roomTtl').text('ルームネーム  :  ' + roomName);
     room = peer.joinRoom('sfu_video_' + roomName, { mode: 'sfu', stream: localStream });
@@ -169,6 +182,9 @@ $(function () {
         sendTime: time,
         cont: msg
       }
+      if (!msg) {
+        return;
+      }
       room.send(o);
       message('自分> ' + o.cont + '  |  ' + o.sendTime);
       $('#inputMsg').val("");
@@ -177,6 +193,9 @@ $(function () {
 
     $('#timeSend').on('click', e => {
       let timerNumber = $('#timeInput').val();
+      if (!timerNumber) {
+        return;
+      }
       if ($.isNumeric(timerNumber)) {
         room.send(timerNumber);
         $('#timer').attr('data-minutes-left', timerNumber);
