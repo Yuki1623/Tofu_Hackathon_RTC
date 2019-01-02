@@ -4,7 +4,7 @@ $(function () {
   let existingCall = null;
   let localStream = null;
   let closeRoom = null;
-  let firstConect = false;
+  let firstConect = true;
   let userName = null;
 
   const ss = ScreenShare.create({ debug: true });
@@ -47,14 +47,10 @@ $(function () {
       $('#videoOther').find('video').get(0).play();
     });
 
-    room.on('peerLeave', e => {
+    room.on('peerLeave', () => {
       if (!firstConect) {
         console.log('相手との接続が切れました。');
-        $('#timer').empty();
-        $('#timeInputBox').show();
-        firstConect = true;
-        $('.mainDisplay').hide();
-        message('相手との接続が切れましt。');
+        location.reload();
       }
     });
 
@@ -108,6 +104,7 @@ $(function () {
   };
 
   $('#goConect').on('click', () => {
+    $('#videoOther').show();
     firstConect = false;
     room.send(true);
     room.close();
@@ -146,11 +143,7 @@ $(function () {
   // roomを抜ける
   $('#stopRoom').on('click', () => {
     room.close();
-    $('#roomName').val("");
-    $('.overFlow').show();
-    $('#showMsg').empty();
-    $('#timer').empty();
-    $('#timeInputBox').show();
+    location.reload();
   });
 
   // roomにアクセス

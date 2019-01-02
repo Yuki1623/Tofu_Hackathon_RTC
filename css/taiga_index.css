@@ -35,7 +35,12 @@ header{
   justify-content: space-around;
 }
 
+.videoOther{
+  display: none;
+}
+
 .video{
+  display: none;
   width: 100%;
     text-align: center;
 }
