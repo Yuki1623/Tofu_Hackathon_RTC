@@ -3,85 +3,142 @@
 
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
     <title>SkyWay SFURoom テキストチャット</title>
     <link rel="stylesheet" href="taiga_index.css">
     <link rel="stylesheet" href="fusa.css">
+=======
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>モブプロひろば</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="css/taiga_index.css">
+>>>>>>> taiga_dev
 </head>
 
 <body>
+    <div class="wrapper">
+        <header>
+            <h1 id="roomTtl">no name</h1>
+            <button id="stopRoom">
+                <i class="fas fa-times"></i>
+            </button>
+        </header>
+        <div class="flexBox">
+            <div class="leftBox">
+                <div class="pure-u-2-3 zindex" id="video-container">
 
-    <!-- video -->
-    <div class="pure-g">
+                    <div class="my-video">
+                        <video id="my-video" muted="true" autoplay playsinline></video>
+                    </div>
+                </div>
 
-        <!-- Video area -->
-        <div class="pure-u-2-3" id="video-container">
-            <div id="their-videos"></div>
-            <div>
-                <label id="my-label"></label>
-                <video id="my-video" muted="true" autoplay playsinline></video>
-            </div>
-        </div>
+                <div class="msgCont" id="msgCont">
+                    <div class="msgCont__inner">
+                        <div id="showMsg" class="showMsg"></div>
+                        <div class="msgCont__inputBox">
+                            <input id="inputMsg" type="text">
+                            <button id="sendMsg">送信</button>
+                        </div>
+                    </div>
+                </div>
 
-        <!-- Steps -->
-        <div class="pure-u-1-3">
-            <h2>SkyWay Video Chat</h2>
-
-            <div class="select">
-                <label for="audioSource">Audio input source: </label><select id="audioSource"></select>
-            </div>
-
-            <div class="select">
-                <label for="videoSource">Video source: </label><select id="videoSource"></select>
-            </div>
-
-            <!-- Get local audio/video stream -->
-            <div id="step1">
-                <p>Please click `allow` on the top of the screen so we can access your webcam and microphone for calls.</p>
-                <div id="step1-error">
-                    <p>Failed to access the webcam and microphone. Make sure to run this demo on an http server and
-                        click allow when asked for permission by the browser.</p>
-                    <a href="#" class="pure-button pure-button-error" id="step1-retry">Try again</a>
+                <div id="specificationCont" class="specificationCont">
+                    <button id="specification_00">デザイン１</button>
+                    <div class="specification__flexBox" id="specification__flexBox00">
+                        <div id="specification_00__cont" class="specification__imgCont">
+                            <img src="./img/design00.png" alt="デザイン１">
+                        </div>
+                        <p class="specification__link" id="specification__link">
+                            <a href="https://drive.google.com/open?id=1MR4Ua_8mhgQUzJpusmBU8PRSlVvjDqSM" target="_blank">素材データリンク</a>
+                        </p>
+                        <a class="back" id="backBtn00">
+                            <p>戻る</p>
+                        </a>
+                    </div>
+                    <button id="specification_01">デザイン２</button>
+                    <div class="specification__flexBox" id="specification__flexBox01">
+                        <div id="specification_01__cont" class="specification__imgCont">
+                            <img src="./img/design01.png" alt="デザイン１">
+                        </div>
+                        <p class="specification__link" id="specification__link">
+                            <a href="https://drive.google.com/open?id=1L35DZu5cBkL3d3nUFTWch8XBbOEo-DKG" target="_blank">素材データリンク</a>
+                        </p>
+                        <a class="back" id="backBtn01">
+                            <p>戻る</p>
+                        </a>
+                    </div>
+                    <button id="specification_02">デザイン３</button>
+                    <div class="specification__flexBox" id="specification__flexBox02">
+                        <div id="specification_02__cont" class="specification__imgCont">
+                            <img src="./img/design02.png" alt="デザイン１">
+                        </div>
+                        <p class="specification__link" id="specification__link">
+                            <a href="https://drive.google.com/open?id=1MR4Ua_8mhgQUzJpusmBU8PRSlVvjDqSM" target="_blank">素材データリンク</a>
+                        </p>
+                        <a class="back" id="backBtn02">
+                            <p>戻る</p>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <!-- Make calls to others -->
-            <div id="step2">
-                <h3>Make a call</h3>
-                <form id="make-call" class="pure-form">
-                    <input type="text" placeholder="Join room..." id="join-room">
-                    <button class="pure-button pure-button-success" type="submit">Join</button>
-                </form>
-                <p><strong>Warning:</strong> You may connect with people you don't know if you both use the same room
-                    name.</p>
-                <p><strong>注意：</strong>同じルーム名を使用した場合、知らない人と接続する可能性があります。</p>
-            </div>
-            <p>Your id: <span id="my-id">...</span></p>
+            <div class="rightBox">
+                <div class="mainDisplay">
+                    <div id="their-videos">
+                        <div class="video" id="videoOther">
+                            <video class="otherVideo"></video>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn__flexBox">
+                    <button id="myFace">インカメモード</button>
+                    <button id="start-screen">画面共有</button>
+                    <button id="onemore">再接続</button>
+                    <button id="mainBtn">メイン</button>
+                    <button id="msgBtn">チャット</button>
+                    <button id="specificationBtn">仕様書</button>
+                </div>
+                <div class="time" id="timer" data-minutes-left="30">
+                </div>
+                <div class="timeInputBox" id="timeInputBox">
+                    <input class="timeInput" id="timeInput">分
+                    <button id="timeSend">時間決定</button>
+                </div>
+                <div class="timeBar">
 
-            <!-- Call in progress -->
-            <div id="step3">
-                <p>Currently in room <span id="room-id">...</span></p>
-                <p><a href="#" class="pure-button pure-button-error" id="end-call">End call</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="overFlow">
+            <div class="overFlow-flexBox">
+                <h1>モブプロひろば</h1>
+                <div class="overFlow-inputBox">
+                    <input id="roomName" type="text">
+                    <button id="access">roomアクセス</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="conectCont" id="conectCont">
+            <div class="conectCont__flexBox">
+                <p id="conectUser"></p>
+                <p> 相手からのコンタクトがありました。
+                </p>
+                <button id="goConect">OK</button>
             </div>
         </div>
     </div>
-    <!-- /video -->
-    room:
-    <input type="text" id="roomName">
-    <button id="join">入室</button>
-    <br>
-    <button id="leave">退室</button>
-    <hr>
-    <input type="text" id="msg" placeholder="チャットを入力">
-    <button id="send">send</button>
-    <hr>
-    <div id="chatLog">
-    </div>
+    <script src="./js/skyway.js"></script>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/jquery.simple.timer.js"></script>
+    <script src="./js/screenshare.min.js"></script>
+    <script src="./js/taiga_script.js"></script>
 
-    <div class="overflow" id="overflow">
-        ユーザーネームを入れてね(半角英字):<input type="text" id="inputMyName">
-        <button id="makeName">ユーザーネーム確定</button>
-    </div>
-
+<<<<<<< HEAD
     <!-- <script type="text/javascript" src="https://cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script> -->
     <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
     <script>
@@ -102,6 +159,8 @@
     <script type="text/javascript" src="video.js"></script>
 
 </body>
+=======
+>>>>>>> taiga_dev
 </body>
 
 </html>
